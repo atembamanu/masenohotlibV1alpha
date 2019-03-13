@@ -1,0 +1,204 @@
+{%extends 'base.html'%}
+{% load static%}
+{% block style_code %}
+<link href="{% static 'CSS/parsley.css' %}" rel="stylesheet"/>
+<link href="{% static 'CSS/datepicker3.css' %}" rel="stylesheet"/>
+<link href="{% static 'CSS/bwizard.min.css' %}" rel="stylesheet"/>
+<link href="{% static 'CSS/bootstrap-multiselect.css' %}" rel="stylesheet">
+<link href="{% static 'CSS/jquery.tagit.css' %}" rel="stylesheet">
+<link href="{% static 'CSS/bootstrap-table.min.css' %}" rel="stylesheet"/>
+<style type="text/css">
+.dialog_paragraph {
+	color: #f00;
+}
+
+.table_data {
+	display: none;
+}
+
+.container {
+	width: 100%;
+	overflow-x: auto;
+}
+
+.td_style {
+	/*color: #000000;*/
+	color: #0057e7;
+}
+
+
+
+
+/*  bhoechie tab */
+div.bhoechie-tab-menu {
+	padding-right: 0;
+	padding-left: 0;
+	padding-bottom: 0;
+}
+
+div.bhoechie-tab-menu div.list-group {
+	margin-bottom: 0;
+}
+
+div.bhoechie-tab-menu div.list-group>a {
+	margin-bottom: 0;
+}
+
+div.bhoechie-tab-menu div.list-group>a .glyphicon,
+div.bhoechie-tab-menu div.list-group>a .fa {
+	color: #00acac;
+}
+
+div.bhoechie-tab-menu div.list-group>a:first-child {
+	border-top-right-radius: 0;
+	-moz-border-top-right-radius: 0;
+}
+
+div.bhoechie-tab-menu div.list-group>a:last-child {
+	border-bottom-right-radius: 0;
+	-moz-border-bottom-right-radius: 0;
+}
+
+div.bhoechie-tab-menu div.list-group>a.active,
+div.bhoechie-tab-menu div.list-group>a.active .glyphicon,
+div.bhoechie-tab-menu div.list-group>a.active .fa {
+	background-color: #00acac;
+	background-image: #00acac;
+	color: #ffffff;
+}
+
+div.bhoechie-tab-menu div.list-group>a.active:after {
+	content: '';
+	position: absolute;
+	left: 100%;
+	top: 50%;
+	margin-top: -13px;
+	border-left: 0;
+	border-bottom: 13px solid transparent;
+	border-top: 13px solid transparent;
+	border-left: 10px solid #00acac;
+}
+
+div.bhoechie-tab-content {
+	background-color: #ffffff;
+	/* border: 1px solid #eeeeee; */
+	padding-left: 20px;
+	padding-top: 10px;
+}
+
+div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
+	display: none;
+}
+
+
+</style>
+{% endblock %}
+
+{%block content%}
+<div><br><br><br><br><br></div>
+<div id="messages" class="alert alert-danger fade in" style="display: none;" tabindex="1">
+	<span class="close" data-dismiss="alert">×</span>
+	<i class="fa fa-info fa-2x pull-left"></i>
+	<span class="invalid-form-message" id="invalid-form-message"></span>
+</div>
+
+<!-- begin row -->
+
+<div id='case_details' class="row">
+	<!-- begin col-12 -->
+	<div class="col-md-12">
+		<!-- begin panel -->
+		<div class="panel panel-inverse">
+			<div class="panel-body">
+				<form class="form-horizontal form-bordered text-center" action="." method="POST" data-parsley-validate="true"
+				name="form-wizard-hhva" id="new_hhva">
+				{% csrf_token %}
+				<div id="wizard-hhva">
+					<ol>
+
+						<li>
+							<b>LECTURE NOTES, CATS & ASSIGNMENTS</b>
+
+						</li>
+
+						<li>
+							<b>ALL EXAMINATION PAST PAPERS</b>
+						</li>
+
+						<li>
+							<b>TUTORIALS, HOW-TO AND OTHER RESOURCES</b>
+						</li>
+					</ol>
+					<div class="wizard-step-1">
+						
+					</div>
+					<div class="wizard-step-2">
+
+					</div>
+					<div class="wizard-step-3">
+
+					</div>
+					
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</div>
+
+
+
+
+{% endblock content%}
+
+{% block javascript_code %}
+<script src="{% static 'JS/parsley.js' %}"></script>
+<script src="{% static 'JS/bwizard.js' %}"></script>
+<script src="{% static 'JS/bootstrap-multiselect.js' %}"></script>
+<script src="{% static 'JS/apps.js' %}"></script>
+<script src="{% static 'JS/form-wizards.js' %}"></script>
+<script src="{% static 'JS/tag-it.js' %}"></script>
+<script src="{% static 'JS/bootstrap-table.min.js' %}"></script>
+<script src="{% static 'JS/bootstrap-table-locale-all.min.js' %}"></script>
+<script>
+	jQuery(document).ready(function () {
+      //multi selects
+      $('#hhva_test').multiselect({
+      	selectAllValue: 'multiselect-all',
+      	includeSelectAllOption: true,
+      	enableCaseInsensitiveFiltering: true,
+      	numberDisplayed: 1,
+      	maxHeight: 300,
+      	buttonWidth: '100%',
+      	buttonClass: 'btn btn-white'
+      });
+
+      $('html,body').scrollTop(0);
+      FormWizardValidation.init();
+  });
+
+
+
+
+
+</script>
+
+
+<script>
+	$(document).ready(function () {
+		$("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
+			e.preventDefault();
+			$(this).siblings('a.active').removeClass("active");
+			$(this).addClass("active");
+			var index = $(this).index();
+			$("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+			$("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+		});
+	});
+
+
+
+
+</script>
+
+{% endblock javascript_code %}
