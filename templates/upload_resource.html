@@ -9,11 +9,154 @@
 <link href='{% static "CSS/github.css" %}' rel="stylesheet">
 <link href='{% static "CSS/jquery.steps.css"%}' rel="stylesheet">
 <link rel="stylesheet" href='{% static "CSS/bracket.css"%}'>
+<link rel="stylesheet" href='{% static "CSS/cards.css"%}'>
 {% endblock style_code %}
 
 {% block content %}
-<div><br><br><br><br><br><br></div>
-<div id="wizard1">
+<div><br><br><br><br><br><br></div> 
+<div class="container-fluid padding" id="accordions">
+	<div class="card">
+		<div class="card-header" id="headingOne">
+			<h5 class="mb-0">
+				<button class="accordion btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+					UPLOAD TUTORIALS
+				</button>
+			</h5>
+		</div>
+
+		<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordions">
+			<div class="panel">
+				<div id="wizard1">
+					<h3>Upload Type</h3>
+					<section>
+						<div class="container">
+							<p><b>Select the Upload Type</b></p>
+							<select class="form-control form-control">
+								<option>Hot Videos</option>
+								<option>Free Pdfs</option>
+								<option>Direct Links</option>
+							</select>
+						</div>
+					</section>
+					<h3>Upload files</h3>
+					<section>
+						<div class="container form-control">
+							<div class="text-danger">Allowed File Extensions: .pdf, .docx, .mp4, urls</div><br>
+							<form id="myForm" method="post" enctype="multipart/form-data">
+
+								<input type="file" id="files" name="files" multiple><br/>
+
+								<div id="selectedFiles"></div>
+
+								<input type="submit" class="btn btn-primary-outline display-4">
+							</form>
+						</div>
+					</section>
+
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+	<div class="card">
+		<div class="card-header" id="headingTwo">
+			<h5 class="mb-0">
+				<button class="accordion btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+					UPLOAD RESOURCES
+				</button>
+			</h5>
+		</div>
+		<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordions">
+			<div class="panel">
+				<div id="wizard2">
+					<h3>Resource Category</h3>
+					<section>
+						<div class="container">
+							<p><b>Select the Category</b></p>
+							<select class="form-control form-control">
+								<option>Programming</option>
+								<option>Networking</option>
+								<option>Blockchain</option>
+								<option>Data Science</option>
+								<option>Web Development</option>
+								<option>Scripting</option>
+								<option>Artificial Intelligence</option>
+							</select>
+						</div>
+					</section>
+					<h3>Upload files</h3>
+					<section>
+						<div class="container form-control">
+							<div class="text-danger">Allowed File Extensions: .pdf, .docx,</div><br>
+							<form id="myForm" method="post" enctype="multipart/form-data">
+
+								<input type="file" id="files" name="files" multiple><br/>
+
+								<div id="selectedFiles"></div>
+
+								<input type="submit" class="btn btn-primary-outline display-4"">
+							</form>
+						</div>
+					</section>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="card">
+		<div class="card-header" id="headingThree">
+			<h5 class="mb-0">
+				<button class="accordion btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+					UPLOAD CHALLENGES
+				</button>
+			</h5>
+		</div>
+		<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordions">
+			<div class="panel">
+				<div id="wizard3">
+					<h3>Challenge Category</h3>
+					<section>
+						<div class="container">
+							<p><b>Select the Category</b></p>
+							<section>
+						<div class="container">
+							<p><b>Select the Category</b></p>
+							<select class="form-control form-control">
+								<option>Programming</option>
+								<option>Networking</option>
+								<option>Blockchain</option>
+								<option>Data Science</option>
+								<option>Web Development</option>
+								<option>Scripting</option>
+								<option>Artificial Intelligence</option>
+							</select>
+						</div>
+					</section>
+						</div>
+					</section>
+					<h3>Upload files</h3>
+					<section>
+						<div class="container form-control">
+							<div class="text-danger">Allowed File Extensions: .pdf, .docx,</div><br>
+							<form id="myForm" method="post" enctype="multipart/form-data">
+
+								<input type="file" id="files" name="files" multiple><br/>
+
+								<div id="selectedFiles"></div>
+
+								<input type="submit" class="btn btn-primary-outline display-4"">
+							</form>
+						</div>
+					</section>
+
+				</div>
+			</div>	
+
+		</div>
+	</div>
+</div>
+<!-- <div id="wizard1">
 
 	<h3>Upload Type</h3>
 	<section>
@@ -42,7 +185,9 @@
 	</section>
 
 </div>
-<div><br><br><br><br></div>
+-->
+
+<div><br><br><br><br></div> 
 {% endblock content %}
 
 {% block javascript_code %}
@@ -59,15 +204,51 @@
 <script src='{% static "JS/parsley.js" %}' ></script>
 <script src='{% static "JS/bracket.js" %}'></script>
 <script>
+	var acc = document.getElementsByClassName("accordion");
+	var i;
+
+	for (i = 0; i < acc.length; i++) {
+		acc[i].addEventListener("click", function() {
+			this.classList.toggle("active");
+			var panel = this.nextElementSibling;
+			if (panel.style.maxHeight){
+				panel.style.maxHeight = null;
+			} else {
+				panel.style.maxHeight = panel.scrollHeight + "px";
+			} 
+		});
+	}
+</script>
+<script>
 	$(document).ready(function(){
 		'use strict';
 
 		$('#wizard1').steps({
 			headerTag: 'h3',
 			bodyTag: 'section',
-			autoFocus: true,
+			autoFocus: false,
 			cssClass: 'wizard step-equal-width',
 			titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
+
+		});
+		$('#wizard2').steps({
+			headerTag: 'h3',
+			bodyTag: 'section',
+			autoFocus: false,
+			cssClass: 'wizard step-equal-width',
+			titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
+
+		});
+		$('#wizard3').steps({
+			headerTag: 'h3',
+			bodyTag: 'section',
+			autoFocus: false,
+			cssClass: 'wizard step-equal-width',
+			titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
+
+		});
+
+	});
           // onStepChanging: function (event, currentIndex, newIndex) {
           //   if(currentIndex < newIndex) {
           //     // Step 1 form validation
@@ -93,35 +274,33 @@
           //   // Always allow step back to the previous step even if the current step is not valid.
           //   } else { return true; }
           // }
-      });
 
-	});
-</script>
-<script type="text/javascript">
-	var selDiv = "";
+      </script>
+      <script type="text/javascript">
+      	var selDiv = "";
 
-	document.addEventListener("DOMContentLoaded", init, false);
-	
-	function init() {
-		document.querySelector('#files').addEventListener('change', handleFileSelect, false);
-		selDiv = document.querySelector("#selectedFiles");
-	}
+      	document.addEventListener("DOMContentLoaded", init, false);
 
-	function handleFileSelect(e) {
-		
-		if(!e.target.files) return;
-		
-		selDiv.innerHTML = "";
-		
-		var files = e.target.files;
-		for(var i=0; i<files.length; i++) {
-			var f = files[i];
-			
-			selDiv.innerHTML += f.name + "<br/>";
+      	function init() {
+      		document.querySelector('#files').addEventListener('change', handleFileSelect, false);
+      		selDiv = document.querySelector("#selectedFiles");
+      	}
 
-		}
-		
-	}
-</script>
-{% endblock javascript_code %}
+      	function handleFileSelect(e) {
+
+      		if(!e.target.files) return;
+
+      		selDiv.innerHTML = "";
+
+      		var files = e.target.files;
+      		for(var i=0; i<files.length; i++) {
+      			var f = files[i];
+
+      			selDiv.innerHTML += f.name + "<br/>";
+
+      		}
+
+      	}
+      </script>
+      {% endblock javascript_code %}
 
